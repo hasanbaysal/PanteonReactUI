@@ -3,9 +3,10 @@
   padding: 20px;
 }
 
+
 .add-button {
   background-color: #007bff; 
-  color: #fff; 
+  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -14,11 +15,25 @@
   margin-bottom: 20px;
 }
 
+.logout-button {
+  background-color: #b30909; 
+  color: #fff; 
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+  position: absolute;
+  right: 20px;
+  margin-bottom: 20px;
+}
+
 .add-button:hover {
   background-color: #0056b3; 
 }
 
-
+/* Popup */
 .popup {
   position: fixed;
   top: 0;
@@ -41,6 +56,7 @@
   position: relative;
 }
 
+
 .popup-content h2 {
   margin-bottom: 20px;
   font-size: 24px;
@@ -57,7 +73,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .form-group input,

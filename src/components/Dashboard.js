@@ -17,7 +17,7 @@ const Dashboard = () => {
       try {
         const storedToken = localStorage.getItem('authToken');
         if (!storedToken) {
-          navigate('/'); 
+          navigate('/');
           return;
         }
         setToken(storedToken);
@@ -32,7 +32,7 @@ const Dashboard = () => {
 
         if (response.status === 401) {
           localStorage.removeItem('authToken');
-          navigate('/'); 
+          navigate('/');
           throw new Error('Unauthorized. Redirecting to login.');
         }
 
@@ -69,7 +69,7 @@ const Dashboard = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://80.253.246.85:5000/api/GameConfiguration/CreateConfig', { 
+      const response = await fetch('http://80.253.246.85:5000/api/GameConfiguration/CreateConfig', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
       if (response.status === 401) {
         localStorage.removeItem('authToken');
-        navigate('/'); 
+        navigate('/');
         throw new Error('Unauthorized. Redirecting to login.');
       }
 
@@ -89,8 +89,8 @@ const Dashboard = () => {
         throw new Error(`Error: ${errorData.message || 'An error occurred'}`);
       }
 
-      handleClosePopup(); // Popup'ı kapat
-      // Verileri güncellemek için yeniden çağırabilirsiniz
+      handleClosePopup();
+
       const storedToken = localStorage.getItem('authToken');
       const fetchData = async () => {
         const result = await fetch('http://80.253.246.85:5000/api/GameConfiguration/GetAllConfig', {
@@ -116,7 +116,16 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h1>Game Configurations</h1>
-      <button className="add-button" onClick={handleAddClick}>Ekle</button>
+      <div className='clearfix'>
+        <button className="add-button" onClick={handleAddClick}>Add</button>
+        <button className="logout-button" onClick={() => {
+
+          localStorage.removeItem('authToken');
+          navigate('/');
+
+        }}>Logout</button>
+
+      </div>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">

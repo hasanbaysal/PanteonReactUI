@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './LoginPage.css';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
@@ -8,6 +8,14 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+   
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      navigate('/dashboard'); 
+    }
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

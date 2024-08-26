@@ -20,29 +20,46 @@ const SignupPage = () => {
         body: JSON.stringify({ userName, password, email }),
       });
 
-     
+
       if (!response.ok) {
-        const data = await response.json();
-        // Hataları işleyin ve state'e atayın
-      var str =" ";
-        if (data.errors) {
-          data.errors.forEach(error => {
-           str+=error.erorrMessage+"\n";
-          });
-          alert(str);
-        }
+        //   const data = await response.json();
+        //   // Hataları işleyin ve state'e atayın
+        // var str =" ";
+        //   if (data.errors) {
+        //     data.errors.forEach(error => {
+        //      str+=error.erorrMessage+"\n";
+        //     });
+        //     alert(str);
+        //   }
+        //   return;
+
+
+
+        // Sunucudan hata mesajını almak için önce JSON'u parse et
+        const errorData = await response.json();
+
       
+        // console.error('Login failed:', errorData);
+
+     
+        // const errorMessages = errorData.errors.map(error => `${error.propertyName}: ${error.errorMessage}`).join(', ');
+        alert(errorData.message);
+
+       
         return;
+
+
       }
-      else{
+
+      else {
         alert("account created successfully")
         navigate('/');
       }
       const data = await response.json();
 
-      
-      
-    
+
+
+
     } catch (error) {
       console.error('Signup error:', error);
 
