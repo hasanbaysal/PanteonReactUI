@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,13 +30,16 @@ const LoginPage = () => {
 
       if (!response.ok) {
         alert(data.message);
-      ;
+      
       }
-      
-      const token = data.token;
-      console.log('Token:', token);
-      localStorage.setItem('authToken', token);
-      
+      else{
+
+        const token = data.token;
+        console.log('Token:', token);
+        localStorage.setItem('authToken', token);
+        navigate('/dashboard');
+      }
+
     } 
     catch (error) {
     
@@ -41,10 +47,10 @@ const LoginPage = () => {
     }
   };
 
-  // const handleSignup = () => {
+  const handleSignup = () => {
    
-  //   //navigate et !
-  // };
+    //navigate et !
+  };
 
   return (
     <div className="login-container">
@@ -52,7 +58,7 @@ const LoginPage = () => {
         <h1>Panteon Games Demo</h1>
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label htmlFor="userName">Username</label>
+            <label  style={{color: "white"}} htmlFor="userName">Username</label>
             <input
               type="text"
               id="userName"
@@ -62,8 +68,9 @@ const LoginPage = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label style={{color: "white"}} htmlFor="password">Password</label>
             <input
+              
               type="password"
               id="password"
               value={password}
