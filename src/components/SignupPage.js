@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './SignupPage.css';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -18,18 +20,33 @@ const SignupPage = () => {
         body: JSON.stringify({ userName, password, email }),
       });
 
+     
       if (!response.ok) {
-        throw new Error('Signup failed');
+        const data = await response.json();
+        // Hataları işleyin ve state'e atayın
+      var str =" ";
+        if (data.errors) {
+          data.errors.forEach(error => {
+           str+=error.erorrMessage+"\n";
+          });
+          alert(str);
+        }
+      
+        return;
       }
-
+      else{
+        alert("account created successfully")
+        navigate('/');
+      }
       const data = await response.json();
-      console.log(data);
 
-      // Başarılı kayıt sonrası yönlendirme veya diğer işlemleri yapabilirsiniz
-      // Örneğin, bir başarı mesajı veya login sayfasına yönlendirme:
-      console.log('Signup successful!');
+      
+      
+    
     } catch (error) {
       console.error('Signup error:', error);
+
+      console.log(error);
     }
   };
 
