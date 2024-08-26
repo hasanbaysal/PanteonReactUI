@@ -12,7 +12,7 @@ const SignupPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:7020/api/User/Register', {
+      const response = await fetch('http://80.253.246.85:5000/api/User/Register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

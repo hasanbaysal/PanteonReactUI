@@ -13,7 +13,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:7020/api/User/Login', {
+      const response = await fetch('http://80.253.246.85:5000/api/User/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
